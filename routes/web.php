@@ -27,3 +27,4 @@ Route::get('/', function () {
 
 
 /// ma ma saturat
+// iar bag ceva
