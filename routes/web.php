@@ -28,3 +28,5 @@ Route::get('/', function () {
 
 /// ma ma saturat
 // iar bag ceva
+
+//boss, cred ca am inteles acum!!!
