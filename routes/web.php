@@ -16,17 +16,3 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-// aici niste teste plm
-
-/// mai multe schiombari
-
-//3 schimbari
-
-// inca ceva schimbari
-
-
-/// ma ma saturat
-// iar bag ceva
-
-//boss, cred ca am inteles acum!!!
