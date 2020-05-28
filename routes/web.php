@@ -18,10 +18,9 @@ Route::get('/', function () {
 });
 
 Route::get('/page', function () {
-    return view('page');
+    return view('public.master_public');
 });
 
-
-// ceva aici
-
-// rata test 22
+Route::get('/layout', function () {
+    return view('layout');
+});
