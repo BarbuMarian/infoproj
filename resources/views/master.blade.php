@@ -13,17 +13,17 @@
     </head>
     <body>
 
-        <div class="">
-                    @yield('banner')
+        <div class=" aci este sectiunea cu public ">
+            @yield('fane')
         </div>
 
 
-        <div class="">
-                @yield('list')
+        <div class=" aci este sectiunea cu admin">
+            @yield('admin')
         </div>
 
     </body>
-</html>
+    </html>
 
 <!--
 <div class="container-fluid">

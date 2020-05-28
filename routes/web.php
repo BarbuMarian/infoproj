@@ -20,6 +20,9 @@ Route::get('/', function () {
 Route::get('/page', function () {
     return view('public.master_public');
 });
+Route::get('/admin', function () {
+    return view('admin.master_admin');
+});
 
 Route::get('/layout', function () {
     return view('layout');
