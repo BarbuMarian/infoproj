@@ -17,9 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/*
 Route::get('/page', function () {
     return view('public.master_public');
 });
+*/
 /*
 Route::get('/admin', function () {
     return view('admin.master_admin');
@@ -30,7 +32,7 @@ Route::get('/admin', 'ProductsController@index');
 Route::post('/admin','ProductsController@store')->name('addimage');
 
 
-Route::get('/product', 'ProductsController@show');
+Route::get('/page', 'ProductsController@show');
 
 
 

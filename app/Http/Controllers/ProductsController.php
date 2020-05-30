@@ -66,7 +66,7 @@ class ProductsController extends Controller
     public function show()
     {
         $products = Product::all();
-        return view('public.produse')->with('products',$products);
+        return view('public.master_public')->with('products',$products);
     }
 
     /**
