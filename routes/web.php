@@ -20,9 +20,19 @@ Route::get('/', function () {
 Route::get('/page', function () {
     return view('public.master_public');
 });
+/*
 Route::get('/admin', function () {
     return view('admin.master_admin');
 });
+*/
+
+Route::get('/admin', 'ProductsController@index');
+Route::post('/admin','ProductsController@store')->name('addimage');
+
+
+Route::get('/product', 'ProductsController@show');
+
+
 
 Route::get('/layout', function () {
     return view('layout');

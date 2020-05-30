@@ -14,7 +14,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.master_admin');
     }
 
     /**
@@ -35,7 +35,26 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new Product();
+
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+    //    $product->pic = $request->input('pic');
+
+        if ($request->hasfile('pic')) {
+            $file = $request->file('pic');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' .$extension;
+            $file->move('uploads/product/',$filename);
+            $product->pic = $filename;
+        }else {
+            return $request;
+            $product->pic = '';
+        }
+        $product->save();
+        return view('admin.master_admin')->with('product',$product);
+        //return redirect('admin');
     }
 
     /**
@@ -44,9 +63,10 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $products = Product::all();
+        return view('public.produse')->with('products',$products);
     }
 
     /**

@@ -14,7 +14,7 @@
     <body>
 
         <div class=" aci este sectiunea cu public ">
-            @yield('fane')
+            @yield('public')
         </div>
 
 

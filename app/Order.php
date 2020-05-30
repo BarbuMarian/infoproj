@@ -9,4 +9,5 @@ class Order extends Model
     protected $fillable = [
         'name', 'phone', 'address',
     ];
+    public $timestamps = false;
 }
