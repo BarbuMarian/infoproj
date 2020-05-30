@@ -34,7 +34,9 @@ Route::post('/admin','ProductsController@store')->name('addimage');
 
 Route::get('/page', 'ProductsController@show');
 
-
+Route::get('/contact', function () {
+    return 'contact us';
+});
 
 Route::get('/layout', function () {
     return view('layout');
