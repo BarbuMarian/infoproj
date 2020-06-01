@@ -14,7 +14,11 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return view('admin.master_admin');
+            $products = Product::all();
+            return view('admin.master_admin',compact('products'));
+    /*        return view('admin.master_admin', [
+                'products' => $products,
+            ]);*/
     }
 
     /**
@@ -24,7 +28,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        $products = Product::all();
+        return view('admin.create',compact('products'));
     }
 
     /**
@@ -33,28 +38,11 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        $product = new Product();
-
-        $product->name = $request->input('name');
-        $product->description = $request->input('description');
-        $product->price = $request->input('price');
-    //    $product->pic = $request->input('pic');
-
-        if ($request->hasfile('pic')) {
-            $file = $request->file('pic');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' .$extension;
-            $file->move('uploads/product/',$filename);
-            $product->pic = $filename;
-        }else {
-            return $request;
-            $product->pic = '';
-        }
-        $product->save();
-        return view('admin.master_admin')->with('product',$product);
-        //return redirect('admin');
+        $product = Product::create($this->validateRequest());
+        $this->storeImage($product);
+        return redirect('admin');
     }
 
     /**
@@ -63,10 +51,9 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        $products = Product::all();
-        return view('public.master_public')->with('products',$products);
+
     }
 
     /**
@@ -87,9 +74,9 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Product $admin)
     {
-        //
+        $this->storeImage($product);
     }
 
     /**
@@ -102,4 +89,27 @@ class ProductsController extends Controller
     {
         //
     }
+
+    public function validateRequest()
+    {
+
+        return request()->validate([
+
+            'name' => 'required|min:3',
+            'description' => 'required',
+            'price' => 'required',
+            'pic' =>'required|file|image|max:5000',
+        ]);
+
+    }
+
+    public function storeImage($product){
+        if (request()->has('pic')) {
+            $product->update([
+                'pic' => request()->pic->store('uploads', 'public'),
+            ]);
+
+        }
+    }
+
 }
