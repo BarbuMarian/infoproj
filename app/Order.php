@@ -10,4 +10,9 @@ class Order extends Model
         'name', 'phone', 'address',
     ];
     public $timestamps = false;
+
+    public function products()
+    {
+        return $this->belongToMany(Product::class)->withPivot(['product_amount']);
+    }
 }

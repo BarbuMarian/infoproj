@@ -41,3 +41,14 @@ Route::get('/contact', function () {
 Route::get('/layout', function () {
     return view('layout');
 });
+
+
+// de aici incepe admin
+
+Route::get('admin', 'ProductsController@index');
+Route::get('admin/create','ProductsController@create');
+Route::post('admin','ProductsController@store');
+Route::get('admin/{admin}','ProductsController@show');
+Route::get('admin/{admin}/edit','ProductsController@edit');
+Route::patch('admin/{admin}','ProductsController@update');
+Route::delete('admin/{admin}','ProductsController@destroy');
