@@ -45,15 +45,18 @@ Route::get('/layout', function () {
 
 // de aici incepe admin
 
-
-
+Route::view('contact','contact');
+//Route::view('about','about');
+Route::get('produse', function () {
+    return view('admin.produse');
+});
 
 
 
 Route::get('admin', 'ProductsController@index');
-//Route::get('admin/create','ProductsController@create');
+Route::get('admin/create','ProductsController@create');
 Route::post('admin','ProductsController@store');
-/*Route::get('admin/{admin}','ProductsController@show');
-Route::get('admin/{admin}/edit','ProductsController@edit');
-Route::patch('admin/{admin}','ProductsController@update');
-Route::delete('admin/{admin}','ProductsController@destroy');*/
+Route::get('/admin/{product}','ProductsController@show');
+Route::get('admin/{product}/edit','ProductsController@edit');
+Route::patch('admin/{product}','ProductsController@update');
+Route::delete('admin/{product}','ProductsController@destroy');

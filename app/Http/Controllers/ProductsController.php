@@ -51,8 +51,13 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($product)
     {
+        //$product = Product::first($product);
+        //$product = Product::where('id', $product)->firstOrFail();
+        $product = Product::where('name', $product)->firstOrFail();
+
+        return view('admin.show', compact('product'));
 
     }
 
@@ -62,9 +67,10 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($product)
     {
-        //
+        $product = Product::where('name', $product)->firstOrFail();
+        return view('admin.edit',compact('product'));
     }
 
     /**
@@ -74,9 +80,12 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Product $admin)
+    public function update( $product)
     {
+        $product = Product::where('name', $product)->firstOrFail();
+        $product->update($this->validateRequest());
         $this->storeImage($product);
+        return redirect('admin/'. $product->name);
     }
 
     /**

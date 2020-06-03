@@ -1,3 +1,5 @@
+@extends('admin.master_admin')
+@section('produse')
 <table class="table">
   <thead>
     <tr>
@@ -9,13 +11,17 @@
     </tr>
   </thead>
   <tbody>
+
       @foreach($products as $product)
     <tr>
       <th scope="row">{{$product->id}}</th>
       <td>{{$product->name}}</td>
       <td>{{$product->description}}</td>
       <td>{{$product->price}}</td>
+      {{--<td><a href="#"><img src="{{asset('storage/'. $product->pic)}}" alt=""></a></td>--}}
     </tr>
      @endforeach
+
   </tbody>
 </table>
+@endsection
