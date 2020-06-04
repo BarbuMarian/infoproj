@@ -14,7 +14,8 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::all();
+        //return view();
     }
 
     /**
@@ -82,4 +83,8 @@ class OrdersController extends Controller
     {
         //
     }
+
 }
+
+
+

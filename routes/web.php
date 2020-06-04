@@ -60,3 +60,7 @@ Route::get('/admin/{product}','ProductsController@show');
 Route::get('admin/{product}/edit','ProductsController@edit');
 Route::patch('admin/{product}','ProductsController@update');
 Route::delete('admin/{product}','ProductsController@destroy');
+
+
+// de aici incepe public
+Route::get('public', 'ProductsController@index');

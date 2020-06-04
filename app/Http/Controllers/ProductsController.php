@@ -94,12 +94,14 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($product)
     {
-        //
+        $product = Product::where('name', $product)->firstOrFail();
+        $product->delete();
+        return redirect('admin');
     }
 
-    public function validateRequest()
+    public function validateRequest($product)
     {
 
         return request()->validate([
