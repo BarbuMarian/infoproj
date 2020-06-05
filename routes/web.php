@@ -47,9 +47,10 @@ Route::get('/layout', function () {
 
 Route::view('contact','contact');
 //Route::view('about','about');
-Route::get('produse', function () {
-    return view('admin.produse');
-});
+Route::get('/add-to-cart/{id}', [
+        'uses' => 'ProductsController@getAddToCart',
+        'as' => 'product.addToCart'
+]);
 
 
 
