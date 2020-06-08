@@ -5,7 +5,7 @@ aici este panoul de introducere/creare a produselor
 <div class="container">
 
     <div class="row">
-        <form method="POST" action="/admin" enctype="multipart/form-data">
+        <form method="POST" action="/admin" enctype="multipart/form-data" class="on_center">
             @csrf
 
             <div class="form-group">

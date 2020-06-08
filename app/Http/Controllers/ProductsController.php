@@ -153,11 +153,20 @@ class ProductsController extends Controller
         if (!session()->has('cart')) {
             return view('shop.shopping-cart');
         }
-        $oldCart = session()->has('cart');
+        $oldCart = session()->get('cart');
         $cart = new Cart($oldCart);
         $total= $cart->totalPrice;
 
         return view('shop.checkout', ['total'=> $total]);
+    }
+
+    public function postCheckout(){
+        /*$data = [
+            'name' => 'required|min:3',
+            'description' => 'required',
+            'price' => 'required',
+            'pic' =>'required|file|image|max:5000',
+        ];*/
     }
 
 

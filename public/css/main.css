@@ -61,3 +61,6 @@ body{
 .blue{
     background-color: blue;
 }
+.on_center {
+	margin: auto;
+}

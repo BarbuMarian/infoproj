@@ -61,7 +61,10 @@ Route::get('/checkout', [
         'uses' => 'ProductsController@getCheckout',
         'as' => 'checkout',
 ]);
-
+Route::post('/checkout', [
+        'uses' => 'ProductsController@postCheckout',
+        'as' => 'checkout',
+]);
 
 Route::get('admin', 'ProductsController@index');
 Route::get('admin/create','ProductsController@create');
