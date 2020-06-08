@@ -47,12 +47,16 @@ Route::get('/layout', function () {
 
 Route::view('contact','contact');
 //Route::view('about','about');
-/*
+
+
 Route::get('/add-to-cart/{id}', [
         'uses' => 'ProductsController@getAddToCart',
-        'as' => 'product.addToCart'
+        'as' => 'product.addToCart',
 ]);
-*/
+Route::get('/shopping-cart', [
+        'uses' => 'ProductsController@getCart',
+        'as' => 'product.shoppingCart',
+]);
 
 
 Route::get('admin', 'ProductsController@index');

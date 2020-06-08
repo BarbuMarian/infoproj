@@ -19,11 +19,11 @@
 
           @foreach($products as $product)
         <tr>
-          <th scope="row"> {{$product->id}}</th>
+          <th>{{$product->id}}</th>
           <td><a href="/admin/{{$product->id}}">{{$product->name}}</a></td>
           <td>{{$product->description}}</td>
           <td>{{$product->price}}</td>
-          <td><a href="#" class="btn btn-default" role='button'>adauga</a></td>
+          <td><a href="{{route('product.addToCart', ['id' =>$product->id])}}" class="btn btn-default" role='button'>adauga</a></td>
           {{--<td><a href="#"><img src="{{asset('storage/'. $product->pic)}}" alt=""></a></td>--}}
         </tr>
          @endforeach

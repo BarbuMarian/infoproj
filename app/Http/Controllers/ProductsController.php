@@ -129,15 +129,28 @@ class ProductsController extends Controller
 
         }
     }
-/*
+
     public function getAddToCart(Request $request, $id){
         $product = Product::find($id);
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        //$oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $oldCart = session()->has('cart') ? session()->get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->add($product, $product->id);
 
         $request->session()->put('cart', $cart);
-        return redirect()->route('admin.master_admin');
+
+        //return redirect()->route('admin.master_admin');
+        return redirect('admin');
     }
-*/
+
+    public function getCart(){
+        if (!session()->has('cart')) {
+            return view('shop.shopping-cart');
+        }
+        $oldCart = session()->get('cart');
+        $cart = new Cart($oldCart);
+        return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+    }
+
+
 }
