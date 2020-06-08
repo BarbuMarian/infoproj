@@ -1,7 +1,7 @@
 aici este de edit
 
 <div class="container">
-    <form method="POST" action="/admin/{{$product->name}}" enctype="multipart/form-data">
+    <form method="POST" action="/admin/{{$product->id}}" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
 

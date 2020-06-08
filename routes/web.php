@@ -47,11 +47,12 @@ Route::get('/layout', function () {
 
 Route::view('contact','contact');
 //Route::view('about','about');
+/*
 Route::get('/add-to-cart/{id}', [
         'uses' => 'ProductsController@getAddToCart',
         'as' => 'product.addToCart'
 ]);
-
+*/
 
 
 Route::get('admin', 'ProductsController@index');
@@ -64,4 +65,4 @@ Route::delete('admin/{product}','ProductsController@destroy');
 
 
 // de aici incepe public
-Route::get('public', 'ProductsController@index');
+//Route::get('public', 'ProductsController@index');
