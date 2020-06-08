@@ -7,6 +7,7 @@
              <p><a href="{{route('product.shoppingCart')}}"><i class="fas fa-shopping-cart"></i>
                 <span class="badge">{{session()->has('cart') ? session()->get('cart')->totalQty : ''}}</span>
             </a></p>
+
             <p><a href="/admin">vezi produse</a></p>
             <p><a href="">vezi comenzi</a></p>
             <p><a href="/admin/create">baga produse</a></p>

@@ -4,7 +4,7 @@ namespace App;
 
 class Cart
 {
-
+/*
     public  $items = null;
     public  $totalQty = 0;
     public  $totalPrice = 0;
@@ -33,7 +33,7 @@ class Cart
 
 
     }
-
+*/
 
 
 }
