@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Cart;
+use App\Order;
 use Session;
 
 class ProductsController extends Controller
@@ -161,12 +162,28 @@ class ProductsController extends Controller
     }
 
     public function postCheckout(){
-        /*$data = [
-            'name' => 'required|min:3',
-            'description' => 'required',
-            'price' => 'required',
-            'pic' =>'required|file|image|max:5000',
-        ];*/
+        $data = request()->validate([
+               'name' => 'required|min:3',
+               'phone' => 'required|int|min:4',
+               'address' =>'required|min:5',
+           ]);
+
+        /*$order = new Order();
+        $order->name = $request->input('name');
+        $order->phone = $request->input('phone');
+        $order->address = $request->input('address');*/
+        //$order->save();
+        if (!session()->has('cart')) {
+            //return redirect()->route('shop.shoppingCart');
+            //return redirect()->route('shop.shopping-cart');
+            return redirect('admin');
+        }
+        $oldCart = session()->get('cart');
+        $cart = new Cart($oldCart);
+
+        session()->forget('cart');
+        //return redirect()->route('admin.produse')->with('success', 'Successfuly prurchased');
+        return redirect('admin')->with('success', 'Successfuly prurchased');
     }
 
 

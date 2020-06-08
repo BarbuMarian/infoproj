@@ -6,6 +6,9 @@
             <p>total de plata este {{ $total }}</p>
             <form method="POST" action="{{route('checkout')}}">
                 @csrf
+                <div class="alert alert-danger {{!session()->has('error') ? 'hidden' : ''}}">
+                        {{session()->get('error')}}
+                </div>
 
                 <div class="form-group">
                 <label for="formGroupExampleInput">Numele Tau</label>

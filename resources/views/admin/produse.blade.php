@@ -1,5 +1,17 @@
 @extends('admin.master_admin')
 @section('produse')
+
+@if(session()->has('success'))
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-success">
+                {{session()->get('success')}}
+            </div>
+        </div>
+    </div>
+@endif
+
+
 <table class="table">
   <thead>
     <tr>

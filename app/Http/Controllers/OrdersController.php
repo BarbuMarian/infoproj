@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
+use App\Cart;
 use App\Order;
 
 class OrdersController extends Controller
@@ -85,6 +87,3 @@ class OrdersController extends Controller
     }
 
 }
-
-
-
