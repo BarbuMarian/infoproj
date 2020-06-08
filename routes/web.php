@@ -57,6 +57,10 @@ Route::get('/shopping-cart', [
         'uses' => 'ProductsController@getCart',
         'as' => 'product.shoppingCart',
 ]);
+Route::get('/checkout', [
+        'uses' => 'ProductsController@getCheckout',
+        'as' => 'checkout',
+]);
 
 
 Route::get('admin', 'ProductsController@index');

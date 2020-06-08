@@ -1,4 +1,5 @@
-
+@extends('admin.master_admin')
+@section('produse')
 
 aici este panoul de show a produselor
 
@@ -6,14 +7,18 @@ aici este panoul de show a produselor
 <p><a href="/admin/{{$product->id}}/edit">edit product</a></p>
 
     <div class="row">
-        <h1>details for {{$product->name}}</h1>
-        <h1>details for {{$product->description}}</h1>
-        <h2>pretul ii {{$product->price}}</h2>
+        <ul>
+            <li><div><h3>numele este :  {{$product->name}}</h3></div></li>
+            <li><div><h3>descrirea produsului este : {{$product->description}}</h3></div></li>
+            <li><div><h3>pretul este: {{$product->price}}</h3></div></li>
+        </ul>
+
         <hr>
         <form class="" action="/admin/{{$product->id}}" method="post">
             @csrf
             @method('DELETE')
-            <button type="submit" name="delete">DELETE</button>
+            <button type="submit" name="delete" class="btn btn-danger">DELETE</button>
         </form>
     </div>
 </div>
+@endsection

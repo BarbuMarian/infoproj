@@ -19,7 +19,7 @@ class ProductsController extends Controller
     public function index()
     {
             $products = Product::all();
-            return view('admin.master_admin',compact('products'));
+            return view('admin.produse',compact('products'));
          /*  return view('admin.master_admin', [
                 'products' => $products,
             ]);*/
@@ -147,6 +147,17 @@ class ProductsController extends Controller
         $oldCart = session()->get('cart');
         $cart = new Cart($oldCart);
         return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+    }
+
+    public function getCheckout(){
+        if (!session()->has('cart')) {
+            return view('shop.shopping-cart');
+        }
+        $oldCart = session()->has('cart');
+        $cart = new Cart($oldCart);
+        $total= $cart->totalPrice;
+
+        return view('shop.checkout', ['total'=> $total]);
     }
 
 

@@ -4,7 +4,7 @@ namespace App;
 
 class Cart
 {
-/*
+
     public  $items = null;
     public  $totalQty = 0;
     public  $totalPrice = 0;
@@ -22,9 +22,10 @@ class Cart
         $storedItem = ['qty' => 0, 'price' => $item->price, 'item' => $item];
         if ($this->items) {
             if (array_key_exists($id, $this->items)) {
-                $storedItem = $storedItem[$id];
+                $storedItem = $this->items[$id];
             }
         }
+
         $storedItem['qty']++;
         $storedItem['price'] = $item->price * $storedItem['qty'];
         $this->items[$id] = $storedItem;
@@ -33,7 +34,7 @@ class Cart
 
 
     }
-*/
+
 
 
 }

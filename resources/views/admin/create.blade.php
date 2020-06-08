@@ -1,5 +1,5 @@
-
-@section('create')
+@extends('admin.master_admin')
+@section('produse')
 aici este panoul de introducere/creare a produselor
 
 <div class="container">
@@ -36,4 +36,4 @@ aici este panoul de introducere/creare a produselor
         </form>
     </div>
 </div>
-@show
+@endsection
