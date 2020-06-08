@@ -14,15 +14,6 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
-    /*public function __construct(){
-        $this->middleware();
-    }*/
-=======
-    public function __construct(){
-        $this->middleware();
-    }
->>>>>>> 0498cb70a42536acf50227bcbff2c41fd6909004
 
 
     public function index()
@@ -135,7 +126,7 @@ class ProductsController extends Controller
 
         }
     }
-/*
+
     public function getAddToCart(Request $request, $id){
         $product = Product::find($id);
         //$oldCart = Session::has('cart') ? Session::get('cart') : null;
@@ -148,7 +139,6 @@ class ProductsController extends Controller
         //return redirect()->route('admin.master_admin');
         return redirect('admin');
     }
-<<<<<<< HEAD
 
     public function getCart(){
         if (!session()->has('cart')) {
@@ -160,7 +150,4 @@ class ProductsController extends Controller
     }
 
 
-=======
-*/
->>>>>>> 0498cb70a42536acf50227bcbff2c41fd6909004
 }
