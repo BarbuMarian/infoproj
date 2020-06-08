@@ -64,4 +64,4 @@ Route::delete('admin/{product}','ProductsController@destroy');
 
 
 // de aici incepe public
-Route::get('public', 'ProductsController@index');
+//Route::get('public', 'ProductsController@index');

@@ -14,6 +14,11 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->middleware();
+    }
+
+
     public function index()
     {
             $products = Product::all();
@@ -57,7 +62,7 @@ class ProductsController extends Controller
     {
         //$product = Product::first($product);
         //$product = Product::where('id', $product)->firstOrFail();
-        $product = Product::where('name', $product)->firstOrFail();
+        $product = Product::where('id', $product)->firstOrFail();
 
         return view('admin.show', compact('product'));
 
@@ -71,7 +76,7 @@ class ProductsController extends Controller
      */
     public function edit($product)
     {
-        $product = Product::where('name', $product)->firstOrFail();
+        $product = Product::where('id', $product)->firstOrFail();
         return view('admin.edit',compact('product'));
     }
 
@@ -84,10 +89,10 @@ class ProductsController extends Controller
      */
     public function update( $product)
     {
-        $product = Product::where('name', $product)->firstOrFail();
+        $product = Product::where('id', $product)->firstOrFail();
         $product->update($this->validateRequest());
         $this->storeImage($product);
-        return redirect('admin/'. $product->name);
+        return redirect('admin/'. $product->id);
     }
 
     /**
@@ -98,12 +103,12 @@ class ProductsController extends Controller
      */
     public function destroy($product)
     {
-        $product = Product::where('name', $product)->firstOrFail();
+        $product = Product::where('id', $product)->firstOrFail();
         $product->delete();
         return redirect('admin');
     }
 
-    public function validateRequest($product)
+    public function validateRequest()
     {
 
         return request()->validate([
