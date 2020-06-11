@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.logare');
 });
 
 /*
@@ -66,6 +66,15 @@ Route::post('/checkout', [
         'as' => 'checkout',
 ]);
 
+Route::get('/reduce{id}', [
+        'uses' => 'ProductsController@getReduceByOne',
+        'as' => 'product.reduceByOne',
+]);
+Route::get('/remove{id}', [
+        'uses' => 'ProductsController@getRemoveItem',
+        'as' => 'product.remove',
+]);
+
 Route::get('admin', 'ProductsController@index');
 Route::get('admin/create','ProductsController@create');
 Route::post('admin','ProductsController@store');
@@ -77,3 +86,9 @@ Route::delete('admin/{product}','ProductsController@destroy');
 
 // de aici incepe public
 //Route::get('public', 'ProductsController@index');
+Route::get('/test', function () {
+    return view('admin.logare');
+});
+
+Route::post('/logare', 'UsersController@index');
+//Route::get('/pa', 'UsersController@logOut');

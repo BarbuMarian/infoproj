@@ -19,8 +19,8 @@ aici este pagina de shopping cu poroduse
                         <td> {{$product['qty']}}</td>
                         <td> {{$product['item']['name']}}</td>
                         <td> {{$product['price']}}</td>
-                        <td><a href="#">reduce by 1</a></td>
-                        <td><a href="#">reduce all</a></td>
+                        <td><a href="{{route('product.reduceByOne', ['id' => $product['item']['id']])}}">reduce by 1</a></td>
+                        <td><a href="{{route('product.remove', ['id' => $product['item']['id']])}}">reduce all</a></td>
                     </tr>
                     @endforeach
                     </tbody>

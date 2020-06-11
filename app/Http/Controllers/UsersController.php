@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
-use App\Users;
-
+use App\User;
+use Session;
 class UsersController extends Controller
 {
     /**
@@ -12,75 +13,43 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        /*$users = User::all();
-        return view();*/
+
+        $users = User::all();
+        $username = $request->input('username');
+        $password = $request->input('password');
+        $db = User::where('username', $username)->where('password', $password)->get();
+        $arr = (array)$db;
+        if (!$arr) {
+            return 'vai de mm tai ca nu merge';
+        }else {
+            echo 'merge si esti logat';
+            echo '<br>';
+            $string = Str::random(40);
+            /*$request->session()->put('admin' ,$string);
+            $get_sesstion = $request->session()->get();*/
+            return $string;
+        }
+
+/*
+        $data = $request->input();
+        $request->session()->put('Data',$data);
+        $output = $request->session()->get('Data');
+        if ($output) {
+            echo "session is here";
+            return $output;
+        }else {
+            echo "session nu eaci";
+        }
+*/
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function logOut(){
+        $session()->forget('admin');
+        return redirect('admin');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

@@ -141,6 +141,36 @@ class ProductsController extends Controller
         return redirect('admin');
     }
 
+    public function getReduceByOne($id){
+        $oldCart = session()->has('cart') ? session()->get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->reduceByOne($id);
+
+        if (count($cart->items) > 0) {
+            session()->put('cart', $cart);
+        }else {
+            session()->forget('cart');
+        }
+
+        return redirect()->route('product.shoppingCart');
+        //return view('shop.shopping-cart');
+    }
+
+    public function getRemoveItem($id){
+        $oldCart = session()->has('cart') ? session()->get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->removeItem($id);
+
+        if (count($cart->items) > 0) {
+            session()->put('cart', $cart);
+        }else {
+            session()->forget('cart');
+        }
+
+
+        return redirect()->route('product.shoppingCart');
+    }
+
     public function getCart(){
         if (!session()->has('cart')) {
             return view('shop.shopping-cart');
@@ -157,21 +187,32 @@ class ProductsController extends Controller
         $oldCart = session()->get('cart');
         $cart = new Cart($oldCart);
         $total= $cart->totalPrice;
+        /*
+        aici testez eu diverse
+        */
 
+         //dd($cart);
+         //return $cart->items;
+
+        //oprire testare
         return view('shop.checkout', ['total'=> $total]);
     }
 
-    public function postCheckout(){
+    public function postCheckout(Request $request){
+        $order = new Order();
+
+
         $data = request()->validate([
                'name' => 'required|min:3',
                'phone' => 'required|int|min:4',
                'address' =>'required|min:5',
            ]);
 
-        /*$order = new Order();
         $order->name = $request->input('name');
         $order->phone = $request->input('phone');
-        $order->address = $request->input('address');*/
+        $order->address = $request->input('address');
+        //return $order->name ." +" . $order->phone . " +" . $order->address;
+
         //$order->save();
         if (!session()->has('cart')) {
             //return redirect()->route('shop.shoppingCart');
@@ -180,6 +221,27 @@ class ProductsController extends Controller
         }
         $oldCart = session()->get('cart');
         $cart = new Cart($oldCart);
+
+
+
+        //teste incep
+        $cart->items;
+        $cart->totalQty;
+        $cart->totalPrice;
+        //return  is_array($cart->items) ? 'Array' : 'not an Array';
+
+
+        //dd($cart->items);
+            //dd($cart->items);
+            foreach ($cart->items as $key => $value) {
+                return $value;
+                 foreach ($key as $x) {
+                     return $x;
+                 }
+            }
+
+
+        //teste gata
 
         session()->forget('cart');
         //return redirect()->route('admin.produse')->with('success', 'Successfuly prurchased');
