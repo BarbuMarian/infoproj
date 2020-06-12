@@ -1,5 +1,5 @@
-aici este de edit
-
+@extends('admin.master_admin')
+@section('produse')
 <div class="container">
     <form method="POST" action="/admin/{{$product->id}}" enctype="multipart/form-data">
         @csrf
@@ -32,3 +32,4 @@ aici este de edit
          <button type="submit" name="submit" class="btn btn-primary">Adauga Produs</button>
     </form>
 </div>
+@endsection

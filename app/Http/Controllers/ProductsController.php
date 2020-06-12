@@ -16,14 +16,30 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function sort(){
+        /*$product = Product::all()->sortBy("name");
+        $products = new Product;
+        if (request()->has('sort')) {
+            $products = $products->orderBy('name', request('sort'));
+        }
+        return view('admin.produse', compact('products'));*/
+    }
 
-    public function index()
+
+    public function index(Request $request)
     {
-            $products = Product::all();
-            return view('admin.produse',compact('products'));
+            //$products = Product::all()->sortBy("name");
+            $products = Product::all()->sortByDesc("name");
+            //return view('admin.produse',compact('products'));
          /*  return view('admin.master_admin', [
                 'products' => $products,
             ]);*/
+            if ($request->session()->get('admin') === null) {
+                // user value cannot be found in session
+                return view('public.produse',compact('products'));
+            }else {
+                return view('admin.produse',compact('products'));
+            }
     }
 
     /**

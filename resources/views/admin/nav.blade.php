@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-12 pink">
             <p>aici este adminul</p>
-            <p><a href="/logare">logare</a></p>
-            <p><a href="#">deconectare</a></p>
+            <p><a href="/login">logare</a></p>
+            <p><a href="/logout">deconectare</a></p>
              <p><a href="{{route('product.shoppingCart')}}"><i class="fas fa-shopping-cart"></i>
                 <span class="badge">{{session()->has('cart') ? session()->get('cart')->totalQty : ''}}</span>
             </a></p>

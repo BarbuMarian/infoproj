@@ -20,34 +20,27 @@ class UsersController extends Controller
         $username = $request->input('username');
         $password = $request->input('password');
         $db = User::where('username', $username)->where('password', $password)->get();
-        //$arr = (array)$db;
-    //    return $db->count();
         if (!$db->count()) {
-            return 'nu s-a reusit logarea';
+              $message = "Te rog sa completezi datele corecte";
+              return redirect('login')->with('message',$message);
+
         }else {
-            echo "esti logat";
-            //$string = Str::random(40);
+            //$request->session()->set('admin' ,$username);
             $request->session()->put('admin' ,$username);
             $get_sesstion = $request->session()->get('admin');
-            //return $get_sesstion;
+            return redirect('admin')->with('success', 'Te-ai logat cu succes');
         }
 
-/*
-        $data = $request->input();
-        $request->session()->put('Data',$data);
-        $output = $request->session()->get('Data');
-        if ($output) {
-            echo "session is here";
-            return $output;
-        }else {
-            echo "session nu eaci";
-        }
-*/
     }
 
-    public function logOut(){
-        $session()->forget('admin');
-        return redirect('admin');
+    public function logOut(Request $request){
+        $get_sesstion = $request->session()->get('admin');
+        //return $get_sesstion;
+        $request->session()->forget('admin');
+        //$request->session()->flush('admin');
+        //$logout = "Te rog sa completezi datele corecte";
+        //return $get_sesstion;
+        return redirect('admin')->with('logout', 'Te-ai delogat');
     }
 
 

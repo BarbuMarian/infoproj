@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*
 Route::get('/', function () {
-    return view('admin.logare');
+    return view('welcome');
 });
-
+*/
 /*
 Route::get('/page', function () {
     return view('public.master_public');
@@ -75,20 +75,49 @@ Route::get('/remove{id}', [
         'as' => 'product.remove',
 ]);
 
-Route::get('admin', 'ProductsController@index');
+
+Route::group(['middleware' => 'adminMid'], function () {
+    Route::get('admin', 'ProductsController@index');
+    Route::get('admin/create','ProductsController@create');
+    Route::post('admin','ProductsController@store');
+    Route::get('/admin/{product}','ProductsController@show');
+    Route::get('admin/{product}/edit','ProductsController@edit');
+    Route::patch('admin/{product}','ProductsController@update');
+    Route::delete('admin/{product}','ProductsController@destroy');
+
+    //Route::get('/','ProductsController@sort')->name('sorting');
+
+
+
+});
+    Route::get('guest', 'ProductsController@index');
+
+
+
+
+/*
 Route::get('admin/create','ProductsController@create');
 Route::post('admin','ProductsController@store');
 Route::get('/admin/{product}','ProductsController@show');
 Route::get('admin/{product}/edit','ProductsController@edit');
 Route::patch('admin/{product}','ProductsController@update');
 Route::delete('admin/{product}','ProductsController@destroy');
-
+*/
+/*
+Route::get('admin/create','ProductsController@create');
+Route::get('admin/create','ProductsController@create');
+Route::post('admin','ProductsController@store');
+Route::get('/admin/{product}','ProductsController@show');
+Route::get('admin/{product}/edit','ProductsController@edit');
+Route::patch('admin/{product}','ProductsController@update');
+Route::delete('admin/{product}','ProductsController@destroy');
+*/
 
 // de aici incepe public
 //Route::get('public', 'ProductsController@index');
-Route::get('/test', function () {
+Route::get('/login', function () {
     return view('admin.logare');
 });
 
 Route::post('/logare', 'UsersController@index');
-//Route::get('/pa', 'UsersController@logOut');
+Route::get('/logout', 'UsersController@logOut');
