@@ -20,16 +20,15 @@ class UsersController extends Controller
         $username = $request->input('username');
         $password = $request->input('password');
         $db = User::where('username', $username)->where('password', $password)->get();
-        $arr = (array)$db;
-        if (!$arr) {
-            return 'vai de mm tai ca nu merge';
+        //$arr = (array)$db;
+    //    return $db->count();
+        if (!$db->count()) {
+            return 'nu merge';
         }else {
-            echo 'merge si esti logat';
-            echo '<br>';
-            $string = Str::random(40);
-            /*$request->session()->put('admin' ,$string);
-            $get_sesstion = $request->session()->get();*/
-            return $string;
+            //$string = Str::random(40);
+            $request->session()->put('admin' ,$username);
+            $get_sesstion = $request->session()->get('admin');
+            return $get_sesstion;
         }
 
 /*

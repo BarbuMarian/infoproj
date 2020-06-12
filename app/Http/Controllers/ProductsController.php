@@ -230,7 +230,7 @@ class ProductsController extends Controller
         $cart->totalPrice;
         //return  is_array($cart->items) ? 'Array' : 'not an Array';
 
-
+    dd($cart->items);
         //dd($cart->items);
             //dd($cart->items);
             foreach ($cart->items as $key => $value) {
