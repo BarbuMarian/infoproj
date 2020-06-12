@@ -23,12 +23,13 @@ class UsersController extends Controller
         //$arr = (array)$db;
     //    return $db->count();
         if (!$db->count()) {
-            return 'nu merge';
+            return 'nu s-a reusit logarea';
         }else {
+            echo "esti logat";
             //$string = Str::random(40);
             $request->session()->put('admin' ,$username);
             $get_sesstion = $request->session()->get('admin');
-            return $get_sesstion;
+            //return $get_sesstion;
         }
 
 /*
