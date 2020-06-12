@@ -216,6 +216,7 @@ class ProductsController extends Controller
 
     public function postCheckout(Request $request){
         $order = new Order();
+        $product = new Product();
 
 
         $data = request()->validate([
@@ -238,23 +239,21 @@ class ProductsController extends Controller
         $oldCart = session()->get('cart');
         $cart = new Cart($oldCart);
 
-
-
+        $test = array_keys($cart->items);
+        /*return $test;
+        dd($cart->items);*/
         //teste incep
         $cart->items;
         $cart->totalQty;
         $cart->totalPrice;
         //return  is_array($cart->items) ? 'Array' : 'not an Array';
 
-    dd($cart->items);
+        $order->save();
+        $order->products()->attach($test);
+
         //dd($cart->items);
             //dd($cart->items);
-            foreach ($cart->items as $key => $value) {
-                return $value;
-                 foreach ($key as $x) {
-                     return $x;
-                 }
-            }
+
 
 
         //teste gata
