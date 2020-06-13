@@ -16,12 +16,10 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function sort(){
-        /*$product = Product::all()->sortBy("name");
-        $products = new Product;
-        if (request()->has('sort')) {
-            $products = $products->orderBy('name', request('sort'));
-        }
+    public function sort(Request $request){
+    /*    $products = new Product;
+        $products = $products->where('name', 'like', '%' . $request->session()->get('search') . '%')
+                            ->orderBy($request->get('field'), $request)
         return view('admin.produse', compact('products'));*/
     }
 
