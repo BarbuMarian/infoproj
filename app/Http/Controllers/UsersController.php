@@ -36,7 +36,8 @@ class UsersController extends Controller
     public function logOut(Request $request){
         $get_sesstion = $request->session()->get('admin');
         //return $get_sesstion;
-        $request->session()->forget('admin');
+        //$request->session()->forget('admin');
+        $request->session()->flush();
         //$request->session()->flush('admin');
         //$logout = "Te rog sa completezi datele corecte";
         //return $get_sesstion;

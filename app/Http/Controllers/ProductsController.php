@@ -221,7 +221,7 @@ class ProductsController extends Controller
 
         $data = request()->validate([
                'name' => 'required|min:3',
-               'phone' => 'required|int|min:4',
+               'phone' => 'required|numeric|min:4',
                'address' =>'required|min:5',
            ]);
 
