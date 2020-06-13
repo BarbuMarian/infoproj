@@ -22,11 +22,6 @@
 @endif
 --}}
 
-
-
-
-
-
 <table class="table">
   <thead>
     <tr>
@@ -34,29 +29,28 @@
       <th >Nume</th>
       <th >Descriere</th>
       <th >Pret</th>
-      <th >adauga Produs</th>
-      <th >Imagine Produs</th>
     </tr>
   </thead>
   <tbody>
+      {{--
     <div class="pink">
-{{--
+
         <a href="admin/{{route('sorting',['sort' => 'asc'])}}" class="sorting">Sorteaza asc</a>
         <a href="{{route('sorting',['sort' => 'desc'])}}" class="sorting">Sorteaza Desc</a>
 
         <a href="/admin/?sort=asc" class="sorting">Sorteaza asc</a>
         <a href="/admin/?sort=desc" class="sorting">Sorteaza Desc</a>
-        --}}
-    </div>
 
+    </div>
+--}}
       @foreach($products as $product)
     <tr>
       <th>{{$product->id}}</th>
       <td><a href="/admin/{{$product->id}}">{{$product->name}}</a></td>
       <td>{{$product->description}}</td>
       <td>{{$product->price}}</td>
-      <td><a href="{{route('product.addToCart', ['id' =>$product->id])}}" class="btn btn-default" role='button'>adauga</a></td>
-      {{--<td><a href="#"><img src="{{asset('storage/'. $product->pic)}}" alt=""></a></td>--}}
+     {{-- <td><a href="{{route('product.addToCart', ['id' =>$product->id])}}" class="btn btn-default" role='button'>adauga</a></td>
+      <td><a href="#"><img src="{{asset('storage/'. $product->pic)}}" alt=""></a></td>--}}
     </tr>
      @endforeach
 

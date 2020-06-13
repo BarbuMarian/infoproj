@@ -1,5 +1,5 @@
-@extends('admin.master_admin')
-@section('produse')
+@extends('public.master_public')
+@section('continut')
 
 aici este pagina de shopping cu poroduse
     @if(session()->has('cart'))
@@ -10,7 +10,10 @@ aici este pagina de shopping cu poroduse
                       <tr>
                         <th>Cantitatea acestui produs este de:</th>
                         <th>Numele produsului este:</th>
-                        <th>Pretul acestui produs este</th>
+                        <th>Pretul pentru aceste produse este</th>
+                        <th>Mai adauga produs</th>
+                        <th>Sterge un produs</th>
+                        <th>Sterge produsele</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -19,8 +22,9 @@ aici este pagina de shopping cu poroduse
                         <td> {{$product['qty']}}</td>
                         <td> {{$product['item']['name']}}</td>
                         <td> {{$product['price']}}</td>
-                        <td><a href="{{route('product.reduceByOne', ['id' => $product['item']['id']])}}">reduce by 1</a></td>
-                        <td><a href="{{route('product.remove', ['id' => $product['item']['id']])}}">reduce all</a></td>
+                        <td><a href="{{route('product.addToCart', ['id' => $product['item']['id']])}}" class="btn btn-primary" role='button'>Add to cart</a></td>
+                        <td><a href="{{route('product.reduceByOne', ['id' => $product['item']['id']])}}">sterge 1</a></td>
+                        <td><a href="{{route('product.remove', ['id' => $product['item']['id']])}}">sterge tot</a></td>
                     </tr>
                     @endforeach
                     </tbody>

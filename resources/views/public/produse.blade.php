@@ -1,44 +1,31 @@
+@extends('public.master_public')
 
-{{--
-<div class="d-flex bd-highlight ">
-  <div class="p-2 flex-fill bd-highlight pink">Flex item with a lot of content
-<p>astai ala pink</p>
-  </div>
-  <div class="p-2 flex-fill bd-highlight blue">Flex item
-      <p>astai ala blue</p>
-  </div>
-</div>
---}}
+@section('continut')
+@if(session()->has('success'))
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-success">
+                {{session()->get('success')}}
+            </div>
+        </div>
+    </div>
+@endif
+<div class="container-fluid">
+    <div class="row">
 
-<p>stanga pink lista produse</p>
-
-<div class="container">
-    <div class="jumbotron">
-        <table class="table table-stripped table-bordered">
-            <thead>
-                <tr>
-                   <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Price</th>
-
-                    <th scope="col">Pic</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($products as $product)
-                <tr>
-
-                    <td>{{$product->id}}</td>
-                    <td>{{$product->name}}</td>
-                    <td>{{$product->description}}</td>
-                    <td>{{$product->price}}</td>
-                    <td><img src="{{asset('uploads/product/' . $product->pic)}}" width="100px" height="100px"></td>
-
-
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        @foreach($products as $product)
+            <div class="col-3">
+                <div class="card" style="width: 18rem;">
+                    <a href="/guest/{{$product->id}}"><img class="card-img-top img-thumbnail img-responsive myimg" src="{{asset('storage/'. $product->pic)}}"></a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{$product->name}}</h5>
+                        <p class="card-text">{{$product->description}}</p>
+                        <p class="card-text">{{$product->price}}</p>
+                        <a href="{{route('product.addToCart', ['id' =>$product->id])}}" class="btn btn-primary" role='button'>Add to cart</a>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 </div>
+@endsection

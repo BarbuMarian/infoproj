@@ -64,3 +64,17 @@ body{
 .on_center {
 	margin: auto;
 }
+
+.myimg{
+	height: 200px;
+}
+h3 {
+	font-size: 20px;
+	font-weight: bold;
+}
+.order_id{
+	background-color: #ccf2ff;
+}
+.my_order_container{
+	margin: auto auto 30px auto;
+}

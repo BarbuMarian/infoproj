@@ -16,8 +16,9 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $orders = Order::all();
-        //return view();
+        $orders = new Order();
+        $order = \App\Order::with('products')->first();
+        return view('admin.comenzi',compact('orders','product'));
     }
 
     /**

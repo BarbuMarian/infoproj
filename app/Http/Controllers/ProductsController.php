@@ -42,6 +42,13 @@ class ProductsController extends Controller
             }
     }
 
+    public function getorders(){
+        //$products = Product::all();
+        $orders = \App\Order::with('products')->get();
+        return view('admin.comenzi',compact('orders'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -72,13 +79,19 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($product)
+    public function show(Request $request, $product)
     {
         //$product = Product::first($product);
         //$product = Product::where('id', $product)->firstOrFail();
         $product = Product::where('id', $product)->firstOrFail();
 
-        return view('admin.show', compact('product'));
+    //    return view('admin.show', compact('product'));
+
+    if ($request->session()->get('admin') === null) {
+        return view('public.detalii',compact('product'));
+    }else {
+        return view('admin.show',compact('product'));
+    }
 
     }
 
@@ -154,7 +167,8 @@ class ProductsController extends Controller
         $request->session()->put('cart', $cart);
 
         //return redirect()->route('admin.master_admin');
-        return redirect('admin');
+        //return redirect('guest');
+        return back();
     }
 
     public function getReduceByOne($id){
@@ -256,16 +270,18 @@ class ProductsController extends Controller
         //$order->products()->attach($product_list);
 
         foreach ($cart->items as $key => $list) {
-            //var_dump($list);
-            //dd($list['qty']);
             $order->products()->attach([
                     $last_order => ['product_id' => $key,
                                     'product_amount' => $list['qty']
-                 ],
-
+                                     ],
             ]);
 
         }
+
+
+
+
+
         //dd($cart->items);
     /*    $order->products()->attach([
                 $last_order = ['product_amount' => $product_list],
@@ -281,7 +297,7 @@ class ProductsController extends Controller
 
         session()->forget('cart');
         //return redirect()->route('admin.produse')->with('success', 'Successfuly prurchased');
-        return redirect('admin')->with('success', 'Successfuly prurchased');
+        return redirect('guest')->with('success', 'Successfuly prurchased');
     }
 
 

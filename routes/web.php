@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //    $order = \App\Order::with('products')->first();
+    //$product = \App\Product::with('orders')->first();
+
+    //return redirect('admin',compact('order'));
 });
 
 /*
@@ -86,11 +89,12 @@ Route::group(['middleware' => 'adminMid'], function () {
     Route::delete('admin/{product}','ProductsController@destroy');
 
     //Route::get('/','ProductsController@sort')->name('sorting');
-
+    Route::get('comenzi','ProductsController@getorders');
 
 
 });
     Route::get('guest', 'ProductsController@index');
+    Route::get('/guest/{product}', 'ProductsController@show');
 
 
 

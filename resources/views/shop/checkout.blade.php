@@ -1,12 +1,12 @@
-@extends('admin.master_admin')
-@section('produse')
+@extends('public.master_public')
+@section('continut')
     <div class="row">
         <div class="col-6 on_center">
             <p>checkout</p>
             <p>total de plata este {{ $total }}</p>
             <form method="POST" action="{{route('checkout')}}">
                 @csrf
-                <div class="alert alert-danger {{!session()->has('error') ? 'hidden' : ''}}">
+                <div class="{{!session()->has('error') ? 'hidden' : ''}}">
                         {{session()->get('error')}}
                 </div>
 

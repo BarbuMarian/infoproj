@@ -1,9 +1,17 @@
-<div class="container-fluid red">
-<p>acii este bannerul</p>
-<p>acii este bannerul</p>
-<p>acii este bannerul</p>
-<p>acii este bannerul</p>
-<p>acii este bannerul</p>
-<p>acii este bannerul</p>
-<p>acii este bannerul</p>
-</div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="/guest">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="#">Features</a>
+          <a class="nav-item nav-link" href="#">Pricing</a>
+          <a href="{{route('product.shoppingCart')}}"><i class="fas fa-shopping-cart nav-item nav-link"></i>
+             <span class="badge">{{session()->has('cart') ? session()->get('cart')->totalQty : ''}}</span>
+         </a>
+         <a href="/login" class=" nav-item nav-link">logare</a>
+        </div>
+      </div>
+    </nav>

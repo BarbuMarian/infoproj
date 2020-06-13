@@ -41,7 +41,7 @@ class UsersController extends Controller
         //$request->session()->flush('admin');
         //$logout = "Te rog sa completezi datele corecte";
         //return $get_sesstion;
-        return redirect('admin')->with('logout', 'Te-ai delogat');
+        return redirect('guest')->with('logout', 'Te-ai delogat');
     }
 
 
