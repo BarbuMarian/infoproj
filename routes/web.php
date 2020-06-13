@@ -12,14 +12,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*
 Route::get('/', function () {
-    //    $order = \App\Order::with('products')->first();
-    //$product = \App\Product::with('orders')->first();
 
-    //return redirect('admin',compact('order'));
 });
-
+*/
 /*
 Route::get('/page', function () {
     return view('public.master_public');
@@ -88,15 +85,14 @@ Route::group(['middleware' => 'adminMid'], function () {
     Route::patch('admin/{product}','ProductsController@update');
     Route::delete('admin/{product}','ProductsController@destroy');
 
-    //Route::get('/','ProductsController@sort')->name('sorting');
+
     Route::get('comenzi','ProductsController@getorders');
 
 
 });
-    Route::get('guest', 'ProductsController@index');
+    Route::get('/', 'ProductsController@index');
     Route::get('/guest/{product}', 'ProductsController@show');
-
-
+    Route::get('/','ProductsController@sort')->name('sorting');
 
 
 /*

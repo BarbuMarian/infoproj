@@ -16,11 +16,25 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function sort(Request $request){
+    public function sort(){
     /*    $products = new Product;
         $products = $products->where('name', 'like', '%' . $request->session()->get('search') . '%')
                             ->orderBy($request->get('field'), $request)
         return view('admin.produse', compact('products'));*/
+        $products = new Product();
+        $sort = request('sort');
+
+        if ($sort == 'desc') {
+            $products = Product::all()->sortByDesc("name");
+
+        }else {
+            $products = Product::all()->sortBy("name");
+
+        }
+
+        return view('public.produse',[
+            'sort' => $sort,
+            ])->with('products', $products);
     }
 
 
@@ -295,7 +309,7 @@ class ProductsController extends Controller
 
         session()->forget('cart');
         //return redirect()->route('admin.produse')->with('success', 'Successfuly prurchased');
-        return redirect('guest')->with('success', 'Successfuly prurchased');
+        return redirect('/')->with('success', 'Successfuly prurchased');
     }
 
 

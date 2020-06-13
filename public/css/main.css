@@ -78,3 +78,6 @@ h3 {
 .my_order_container{
 	margin: auto auto 30px auto;
 }
+.card {
+	margin: 15px auto;
+}

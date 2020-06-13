@@ -10,6 +10,13 @@
         </div>
     </div>
 @endif
+<div class="">
+    <span>Sorteaza:</span>
+    <ul class="list-group list-group-horizontal-lg">
+        <li class=""><a href="{{route('sorting',['sort'=> 'asc'])}}" class="btn btn btn-outline-secondary">asc</a></li>
+        <li class=""><a href="{{route('sorting',['sort'=> 'desc'])}}" class="btn btn btn-outline-secondary">desc</a></li>
+    </ul>
+</div>
 <div class="container-fluid">
     <div class="row">
 

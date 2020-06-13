@@ -32,17 +32,9 @@
     </tr>
   </thead>
   <tbody>
-      {{--
-    <div class="pink">
 
-        <a href="admin/{{route('sorting',['sort' => 'asc'])}}" class="sorting">Sorteaza asc</a>
-        <a href="{{route('sorting',['sort' => 'desc'])}}" class="sorting">Sorteaza Desc</a>
 
-        <a href="/admin/?sort=asc" class="sorting">Sorteaza asc</a>
-        <a href="/admin/?sort=desc" class="sorting">Sorteaza Desc</a>
 
-    </div>
---}}
       @foreach($products as $product)
     <tr>
       <th>{{$product->id}}</th>
