@@ -14,12 +14,12 @@
     </head>
     <body>
 
-        <div class=" aci este sectiunea cu public ">
+        <div class="">
             @yield('public')
         </div>
 
 
-        <div class=" aci este sectiunea cu admin">
+        <div class="">
             @yield('admin')
         </div>
 

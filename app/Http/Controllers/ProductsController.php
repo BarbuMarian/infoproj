@@ -18,132 +18,6 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function sort(){
-
-        $products = new Product();
-        $sort = request('sort');
-
-        if ($sort == 'desc') {
-            $products = Product::all()->sortByDesc("name");
-
-        }else {
-            $products = Product::all()->sortBy("name");
-
-        }
-
-        return view('public.produse',[
-            'sort' => $sort,
-            ])->with('products', $products);
-    }
-
-    public function formatSingle($format, $id){
-
-        $products = new Product();
-        $products = Product::where('id', $id)->firstOrFail();
-
-        $products_array = [];
-            $data = [
-            'name' => $products->name,
-            'description' => $products->description,
-            'price' => $products->price,
-        ];
-
-        $products_array[] =$data;
-
-        function array_to_xml($products_array, &$xml_product_info) {
-            foreach($products_array as $key => $value) {
-                if(is_array($value)) {
-                    if(!is_numeric($key)){
-                        $subnode = $xml_product_info->addChild("$key");
-                        array_to_xml($value, $subnode);
-                    }else{
-                        $subnode = $xml_product_info->addChild("item$key");
-                        array_to_xml($value, $subnode);
-                    }
-                }else {
-                $xml_product_info->addChild("$key",htmlspecialchars("$value"));
-                }
-            }
-        }
-
-        $random = Str::random(15);
-        $xml_product_info = new SimpleXMLElement("<?xml version=\"1.0\"?><product_info></product_info>");
-        array_to_xml($products_array,$xml_product_info);
-        $xml_file = $xml_product_info->asXML('xml/'.$random.'.xml');
-        $location ='xml/'.$random.'.xml';
-
-        $get_location = file_get_contents($location);
-
-        if($format == "json"){
-            return response()->json($products);
-        }elseif ($format == "xml") {
-            return response($get_location)->header('Content-Type', 'application/xml');
-        }
-        else{
-            return "formatul selectat nu este disponibil";
-        }
-
-    }
-
-    public function formatAll($format){
-        $products = new Product();
-        $sort = request('sort');
-
-        if ($sort == 'desc') {
-            $products = Product::all()->sortByDesc("name");
-
-        }else {
-            $products = Product::all()->sortBy("name");
-
-        }
-
-        foreach ($products as $product) {
-
-            $data = [
-                'name' => $product->name,
-                'description' => $product->description,
-                'price' => $product->price,
-            ];
-
-
-        $products_array[] =$data;
-        }
-
-
-        function array_to_xml($products_array, &$xml_product_info) {
-            foreach($products_array as $key => $value) {
-                if(is_array($value)) {
-                    if(!is_numeric($key)){
-                        $subnode = $xml_product_info->addChild("$key");
-                        array_to_xml($value, $subnode);
-                    }else{
-                        $subnode = $xml_product_info->addChild("item$key");
-                        array_to_xml($value, $subnode);
-                    }
-                }else {
-                $xml_product_info->addChild("$key",htmlspecialchars("$value"));
-                }
-            }
-        }
-
-        $random = Str::random(15);
-        $xml_product_info = new SimpleXMLElement("<?xml version=\"1.0\"?><product_info></product_info>");
-        array_to_xml($products_array,$xml_product_info);
-        $xml_file = $xml_product_info->asXML('xml/'.$random.'.xml');
-        $location ='xml/'.$random.'.xml';
-
-        $get_location = file_get_contents($location);
-
-        if($format == "json"){
-            return response()->json($products);
-        }elseif ($format == "xml") {
-            return response($get_location)->header('Content-Type', 'application/xml');
-        }
-        else{
-            return "formatul selectat nu este disponibil";
-        }
-
-    }
 
     public function index(Request $request)
     {
@@ -273,7 +147,8 @@ class ProductsController extends Controller
         $cart->add($product, $product->id);
 
         $request->session()->put('cart', $cart);
-        return back();
+    //    return back();
+    return redirect()->route('product.shoppingCart');
     }
 
     public function getReduceByOne($id){
@@ -367,6 +242,133 @@ class ProductsController extends Controller
 
         session()->forget('cart');
         return redirect('/')->with('success', 'Successfuly prurchased');
+    }
+
+    public function sort(){
+
+        $products = new Product();
+        $sort = request('sort');
+
+        if ($sort == 'desc') {
+            $products = Product::all()->sortByDesc("name");
+
+        }else {
+            $products = Product::all()->sortBy("name");
+
+        }
+
+        return view('public.produse',[
+            'sort' => $sort,
+            ])->with('products', $products);
+    }
+
+    public function formatSingle($format, $id){
+
+        $products = new Product();
+        $products = Product::where('id', $id)->firstOrFail();
+
+        $products_array = [];
+            $data = [
+            'name' => $products->name,
+            'description' => $products->description,
+            'price' => $products->price,
+        ];
+
+        $products_array[] =$data;
+
+        function array_to_xml($products_array, &$xml_product_info) {
+            foreach($products_array as $key => $value) {
+                if(is_array($value)) {
+                    if(!is_numeric($key)){
+                        $subnode = $xml_product_info->addChild("$key");
+                        array_to_xml($value, $subnode);
+                    }else{
+                        $subnode = $xml_product_info->addChild("item$key");
+                        array_to_xml($value, $subnode);
+                    }
+                }else {
+                $xml_product_info->addChild("$key",htmlspecialchars("$value"));
+                }
+            }
+        }
+
+        $random = Str::random(15);
+        $xml_product_info = new SimpleXMLElement("<?xml version=\"1.0\"?><product_info></product_info>");
+        array_to_xml($products_array,$xml_product_info);
+        $xml_file = $xml_product_info->asXML('xml/'.$random.'.xml');
+        $location ='xml/'.$random.'.xml';
+
+        $get_location = file_get_contents($location);
+
+        if($format == "json"){
+            return response()->json($products);
+        }elseif ($format == "xml") {
+            return response($get_location)->header('Content-Type', 'application/xml');
+        }
+        else{
+            return "formatul selectat nu este disponibil";
+        }
+
+    }
+
+    public function formatAll($format){
+        $products = new Product();
+        $sort = request('sort');
+
+        if ($sort == 'desc') {
+            $products = Product::all()->sortByDesc("name");
+
+        }else {
+            $products = Product::all()->sortBy("name");
+
+        }
+
+        foreach ($products as $product) {
+
+            $data = [
+                'name' => $product->name,
+                'description' => $product->description,
+                'price' => $product->price,
+            ];
+
+
+        $products_array[] =$data;
+        }
+
+
+        function array_to_xml($products_array, &$xml_product_info) {
+            foreach($products_array as $key => $value) {
+                if(is_array($value)) {
+                    if(!is_numeric($key)){
+                        $subnode = $xml_product_info->addChild("$key");
+                        array_to_xml($value, $subnode);
+                    }else{
+                        $subnode = $xml_product_info->addChild("item$key");
+                        array_to_xml($value, $subnode);
+                    }
+                }else {
+                $xml_product_info->addChild("$key",htmlspecialchars("$value"));
+                }
+            }
+        }
+
+        $random = Str::random(15);
+        $xml_product_info = new SimpleXMLElement("<?xml version=\"1.0\"?><product_info></product_info>");
+        array_to_xml($products_array,$xml_product_info);
+        $xml_file = $xml_product_info->asXML('xml/'.$random.'.xml');
+        $location ='xml/'.$random.'.xml';
+
+        $get_location = file_get_contents($location);
+
+        if($format == "json"){
+            return response()->json($products);
+        }elseif ($format == "xml") {
+            return response($get_location)->header('Content-Type', 'application/xml');
+        }
+        else{
+            return "formatul selectat nu este disponibil";
+        }
+
     }
 
 

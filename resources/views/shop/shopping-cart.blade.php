@@ -9,7 +9,7 @@
                       <tr>
                         <th>Cantitatea acestui produs este de:</th>
                         <th>Numele produsului este:</th>
-                        <th>Pretul pentru aceste produse este</th>
+                        <th>Pretul pentru acest produs este</th>
                         <th>Mai adauga produs</th>
                         <th>Sterge un produs</th>
                         <th>Sterge produsele</th>

@@ -10,27 +10,30 @@
         </div>
     </div>
 @endif
-<div class="">
-    <span>Sorteaza:</span>
-    <ul class="list-group list-group-horizontal-lg">
-        <li class=""><a href="{{route('sorting',['sort'=> 'asc'])}}" class="btn btn btn-outline-secondary">asc</a></li>
-        <li class=""><a href="{{route('sorting',['sort'=> 'desc'])}}" class="btn btn btn-outline-secondary">desc</a></li>
-    </ul>
+<div class="row">
+    <div class="col-4">
+        <span>Sorteaza:</span>
+        <ul class="list-group list-group-horizontal-lg">
+            <li class=""><a href="{{route('sorting',['sort'=> 'asc'])}}" class="btn btn btn-outline-secondary">asc</a></li>
+            <li class=""><a href="{{route('sorting',['sort'=> 'desc'])}}" class="btn btn btn-outline-secondary">desc</a></li>
+        </ul>
+    </div>
+    <div class="col-4">
+        <span>Format Jason:</span>
+        <ul class="list-group list-group-horizontal-lg">
+            <li class=""><a href="{{route('all',['format' => 'json','sort'=> 'asc'])}}" class="btn btn btn-outline-secondary">asc json</a></li>
+            <li class=""><a href="{{route('all',['format' => 'json', 'sort'=> 'desc'])}}" class="btn btn btn-outline-secondary">desc json</a></li>
+        </ul>
+    </div>
+    <div class="col-4">
+        <span>Format XML:</span>
+        <ul class="list-group list-group-horizontal-lg">
+            <li class=""><a href="{{route('all',['format' => 'xml','sort'=> 'asc'])}}" class="btn btn btn-outline-secondary">asc xml</a></li>
+            <li class=""><a href="{{route('all',['format' => 'xml', 'sort'=> 'desc'])}}" class="btn btn btn-outline-secondary">desc xml</a></li>
+        </ul>
+    </div>
 </div>
-<div class="">
-    <span>Format Jason:</span>
-    <ul class="list-group list-group-horizontal-lg">
-        <li class=""><a href="{{route('all',['format' => 'json','sort'=> 'asc'])}}" class="btn btn btn-outline-secondary">asc json</a></li>
-        <li class=""><a href="{{route('all',['format' => 'json', 'sort'=> 'desc'])}}" class="btn btn btn-outline-secondary">desc json</a></li>
-    </ul>
-</div>
-<div class="">
-    <span>Format XML:</span>
-    <ul class="list-group list-group-horizontal-lg">
-        <li class=""><a href="{{route('all',['format' => 'xml','sort'=> 'asc'])}}" class="btn btn btn-outline-secondary">asc xml</a></li>
-        <li class=""><a href="{{route('all',['format' => 'xml', 'sort'=> 'desc'])}}" class="btn btn btn-outline-secondary">desc xml</a></li>
-    </ul>
-</div>
+
 <div class="container-fluid">
     <div class="row">
 
