@@ -2,25 +2,6 @@
 @section('produse')
 
 
-{{--
-    @foreach($orders as $order)
-    <div class="">
-        <li>{{$order->name}}</li>
-        @foreach($order->products as $product)
-                <li>{{$product->name}}</li>
-                <li>{{$product->pivot->product_amount}}</li>
-        @endforeach
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-    </div>
-    @endforeach
---}}
-
-
 @foreach($orders as $order)
     <div class="my_order_container">
         <div class="order_id">
@@ -36,18 +17,5 @@
         @endforeach
     </div>
 @endforeach
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @endsection

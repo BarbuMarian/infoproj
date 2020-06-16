@@ -25,11 +25,3 @@
 
     </body>
     </html>
-
-<!--
-<div class="container-fluid">
-    <div class="container-fluid banner">@yield('banner')</div>
-    <div class="container-fluid product_list">@yield('list')</div>
-    <div class="container-fluid content">@yield('content')</div>
-</div>
-––>

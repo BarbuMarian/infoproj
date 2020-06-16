@@ -10,17 +10,6 @@
         </div>
     </div>
 @endif
-{{--
-@if(session()->has('logout'))
-    <div class="row">
-        <div class="col-12">
-            <div class="alert alert-success">
-                {{session()->get('logout')}}
-            </div>
-        </div>
-    </div>
-@endif
---}}
 
 <table class="table">
   <thead>

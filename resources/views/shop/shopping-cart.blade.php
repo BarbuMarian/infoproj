@@ -1,7 +1,6 @@
 @extends('public.master_public')
 @section('continut')
 
-aici este pagina de shopping cu poroduse
     @if(session()->has('cart'))
         <div class="row">
             <div class="col-12">
@@ -22,7 +21,7 @@ aici este pagina de shopping cu poroduse
                         <td> {{$product['qty']}}</td>
                         <td> {{$product['item']['name']}}</td>
                         <td> {{$product['price']}}</td>
-                        <td><a href="{{route('product.addToCart', ['id' => $product['item']['id']])}}" class="btn btn-primary" role='button'>Add to cart</a></td>
+                        <td><a href="{{route('product.addToCart', ['id' => $product['item']['id']])}}" class="btn btn-primary" role='button'>adauga un produs</a></td>
                         <td><a href="{{route('product.reduceByOne', ['id' => $product['item']['id']])}}">sterge 1</a></td>
                         <td><a href="{{route('product.remove', ['id' => $product['item']['id']])}}">sterge tot</a></td>
                     </tr>
@@ -50,7 +49,7 @@ aici este pagina de shopping cu poroduse
     @else
     <div class="row">
         <div class="col-6">
-            <h2>no items in cart !!</h2>
+            <h2>Cosul este gol!</h2>
         </div>
     </div>
     @endif

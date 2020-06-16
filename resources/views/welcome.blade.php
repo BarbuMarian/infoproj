@@ -64,12 +64,6 @@
         </style>
     </head>
     <body>
-@extends('layout')
 
-@yield('tata')
-
-@section('tata')
-<h1>asta este pe pagina cu wlecome</h1>
-@endsection
     </body>
 </html>

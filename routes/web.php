@@ -12,42 +12,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*
-Route::get('/', function () {
-
-});
-*/
-/*
-Route::get('/page', function () {
-    return view('public.master_public');
-});
-*/
-/*
-Route::get('/admin', function () {
-    return view('admin.master_admin');
-});
-*/
-/*
-Route::get('/admin', 'ProductsController@index');
-Route::post('/admin','ProductsController@store')->name('addimage');
-
-
-Route::get('/page', 'ProductsController@show');
-
-Route::get('/contact', function () {
-    return 'contact us';
-});
-
-Route::get('/layout', function () {
-    return view('layout');
-});
-*/
-
-// de aici incepe admin
-
-Route::view('contact','contact');
-//Route::view('about','about');
-
 
 Route::get('/add-to-cart/{id}', [
         'uses' => 'ProductsController@getAddToCart',
@@ -85,36 +49,18 @@ Route::group(['middleware' => 'adminMid'], function () {
     Route::patch('admin/{product}','ProductsController@update');
     Route::delete('admin/{product}','ProductsController@destroy');
 
-
     Route::get('comenzi','ProductsController@getorders');
-
-
 });
     Route::get('/', 'ProductsController@index');
     Route::get('/guest/{product}', 'ProductsController@show');
     Route::get('/','ProductsController@sort')->name('sorting');
 
 
-/*
-Route::get('admin/create','ProductsController@create');
-Route::post('admin','ProductsController@store');
-Route::get('/admin/{product}','ProductsController@show');
-Route::get('admin/{product}/edit','ProductsController@edit');
-Route::patch('admin/{product}','ProductsController@update');
-Route::delete('admin/{product}','ProductsController@destroy');
-*/
-/*
-Route::get('admin/create','ProductsController@create');
-Route::get('admin/create','ProductsController@create');
-Route::post('admin','ProductsController@store');
-Route::get('/admin/{product}','ProductsController@show');
-Route::get('admin/{product}/edit','ProductsController@edit');
-Route::patch('admin/{product}','ProductsController@update');
-Route::delete('admin/{product}','ProductsController@destroy');
-*/
 
-// de aici incepe public
-//Route::get('public', 'ProductsController@index');
+    Route::get('/detaliiprodus.{format}/{id}','ProductsController@formatSingle')->name('single');
+
+    Route::get('/afisareproduse.{format}','ProductsController@formatAll')->name('all');
+
 Route::get('/login', function () {
     return view('admin.logare');
 });

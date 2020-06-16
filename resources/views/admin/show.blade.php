@@ -1,7 +1,7 @@
 @extends('admin.master_admin')
 @section('produse')
 
-aici este panoul de show a produselor
+
 
 <div class="container">
 <p><a href="/admin/{{$product->id}}/edit" class="btn btn-warning">edit product</a></p>

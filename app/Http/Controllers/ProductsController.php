@@ -7,6 +7,8 @@ use App\Product;
 use App\Cart;
 use App\Order;
 use Session;
+use SimpleXMLElement;
+use Illuminate\Support\Str;
 
 class ProductsController extends Controller
 {
@@ -17,10 +19,7 @@ class ProductsController extends Controller
      */
 
     public function sort(){
-    /*    $products = new Product;
-        $products = $products->where('name', 'like', '%' . $request->session()->get('search') . '%')
-                            ->orderBy($request->get('field'), $request)
-        return view('admin.produse', compact('products'));*/
+
         $products = new Product();
         $sort = request('sort');
 
@@ -37,17 +36,119 @@ class ProductsController extends Controller
             ])->with('products', $products);
     }
 
+    public function formatSingle($format, $id){
+
+        $products = new Product();
+        $products = Product::where('id', $id)->firstOrFail();
+
+        $products_array = [];
+            $data = [
+            'name' => $products->name,
+            'description' => $products->description,
+            'price' => $products->price,
+        ];
+
+        $products_array[] =$data;
+
+        function array_to_xml($products_array, &$xml_product_info) {
+            foreach($products_array as $key => $value) {
+                if(is_array($value)) {
+                    if(!is_numeric($key)){
+                        $subnode = $xml_product_info->addChild("$key");
+                        array_to_xml($value, $subnode);
+                    }else{
+                        $subnode = $xml_product_info->addChild("item$key");
+                        array_to_xml($value, $subnode);
+                    }
+                }else {
+                $xml_product_info->addChild("$key",htmlspecialchars("$value"));
+                }
+            }
+        }
+
+        $random = Str::random(15);
+        $xml_product_info = new SimpleXMLElement("<?xml version=\"1.0\"?><product_info></product_info>");
+        array_to_xml($products_array,$xml_product_info);
+        $xml_file = $xml_product_info->asXML('xml/'.$random.'.xml');
+        $location ='xml/'.$random.'.xml';
+
+        $get_location = file_get_contents($location);
+
+        if($format == "json"){
+            return response()->json($products);
+        }elseif ($format == "xml") {
+            return response($get_location)->header('Content-Type', 'application/xml');
+        }
+        else{
+            return "formatul selectat nu este disponibil";
+        }
+
+    }
+
+    public function formatAll($format){
+        $products = new Product();
+        $sort = request('sort');
+
+        if ($sort == 'desc') {
+            $products = Product::all()->sortByDesc("name");
+
+        }else {
+            $products = Product::all()->sortBy("name");
+
+        }
+
+        foreach ($products as $product) {
+
+            $data = [
+                'name' => $product->name,
+                'description' => $product->description,
+                'price' => $product->price,
+            ];
+
+
+        $products_array[] =$data;
+        }
+
+
+        function array_to_xml($products_array, &$xml_product_info) {
+            foreach($products_array as $key => $value) {
+                if(is_array($value)) {
+                    if(!is_numeric($key)){
+                        $subnode = $xml_product_info->addChild("$key");
+                        array_to_xml($value, $subnode);
+                    }else{
+                        $subnode = $xml_product_info->addChild("item$key");
+                        array_to_xml($value, $subnode);
+                    }
+                }else {
+                $xml_product_info->addChild("$key",htmlspecialchars("$value"));
+                }
+            }
+        }
+
+        $random = Str::random(15);
+        $xml_product_info = new SimpleXMLElement("<?xml version=\"1.0\"?><product_info></product_info>");
+        array_to_xml($products_array,$xml_product_info);
+        $xml_file = $xml_product_info->asXML('xml/'.$random.'.xml');
+        $location ='xml/'.$random.'.xml';
+
+        $get_location = file_get_contents($location);
+
+        if($format == "json"){
+            return response()->json($products);
+        }elseif ($format == "xml") {
+            return response($get_location)->header('Content-Type', 'application/xml');
+        }
+        else{
+            return "formatul selectat nu este disponibil";
+        }
+
+    }
 
     public function index(Request $request)
     {
-            //$products = Product::all()->sortBy("name");
-            $products = Product::all()->sortByDesc("name");
-            //return view('admin.produse',compact('products'));
-         /*  return view('admin.master_admin', [
-                'products' => $products,
-            ]);*/
+            $products = Product::all()->sortBy("name");
             if ($request->session()->get('admin') === null) {
-                // user value cannot be found in session
                 return view('public.produse',compact('products'));
             }else {
                 return view('admin.produse',compact('products'));
@@ -55,7 +156,6 @@ class ProductsController extends Controller
     }
 
     public function getorders(){
-        //$products = Product::all();
         $orders = \App\Order::with('products')->get();
         return view('admin.comenzi',compact('orders'));
     }
@@ -93,11 +193,8 @@ class ProductsController extends Controller
      */
     public function show(Request $request, $product)
     {
-        //$product = Product::first($product);
-        //$product = Product::where('id', $product)->firstOrFail();
         $product = Product::where('id', $product)->firstOrFail();
 
-    //    return view('admin.show', compact('product'));
 
     if ($request->session()->get('admin') === null) {
         return view('public.detalii',compact('product'));
@@ -171,15 +268,11 @@ class ProductsController extends Controller
 
     public function getAddToCart(Request $request, $id){
         $product = Product::find($id);
-        //$oldCart = Session::has('cart') ? Session::get('cart') : null;
         $oldCart = session()->has('cart') ? session()->get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->add($product, $product->id);
 
         $request->session()->put('cart', $cart);
-
-        //return redirect()->route('admin.master_admin');
-        //return redirect('guest');
         return back();
     }
 
@@ -195,7 +288,6 @@ class ProductsController extends Controller
         }
 
         return redirect()->route('product.shoppingCart');
-        //return view('shop.shopping-cart');
     }
 
     public function getRemoveItem($id){
@@ -229,20 +321,12 @@ class ProductsController extends Controller
         $oldCart = session()->get('cart');
         $cart = new Cart($oldCart);
         $total= $cart->totalPrice;
-        /*
-        aici testez eu diverse
-        */
 
-         //dd($cart);
-         //return $cart->items;
-
-        //oprire testare
         return view('shop.checkout', ['total'=> $total]);
     }
 
     public function postCheckout(Request $request){
         $order = new Order();
-        //$product = new Product();
 
 
         $data = request()->validate([
@@ -254,32 +338,23 @@ class ProductsController extends Controller
         $order->name = $request->input('name');
         $order->phone = $request->input('phone');
         $order->address = $request->input('address');
-        //return $order->name ." +" . $order->phone . " +" . $order->address;
 
-        //$order->save();
         if (!session()->has('cart')) {
-            //return redirect()->route('shop.shoppingCart');
-            //return redirect()->route('shop.shopping-cart');
+
             return redirect('admin');
         }
         $oldCart = session()->get('cart');
         $cart = new Cart($oldCart);
 
         $product_list = array_keys($cart->items);
-        /*return $test;
-        dd($cart->items);*/
-        //teste incep
+
         $cart->items;
         $cart->totalQty;
         $cart->totalPrice;
-        //return  is_array($cart->items) ? 'Array' : 'not an Array';
-        //dd($order);
+
         $order->save();
 
-        //dd($cart->items);
         $last_order = $order->id;
-
-        //$order->products()->attach($product_list);
 
         foreach ($cart->items as $key => $list) {
             $order->products()->attach([
@@ -290,25 +365,7 @@ class ProductsController extends Controller
 
         }
 
-
-
-
-
-        //dd($cart->items);
-    /*    $order->products()->attach([
-                $last_order = ['product_amount' => $product_list],
-        ]);*/
-
-
-        //dd($cart->items);
-            //dd($cart->items);
-
-
-
-        //teste gata
-
         session()->forget('cart');
-        //return redirect()->route('admin.produse')->with('success', 'Successfuly prurchased');
         return redirect('/')->with('success', 'Successfuly prurchased');
     }
 

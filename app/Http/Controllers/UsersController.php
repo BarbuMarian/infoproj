@@ -25,7 +25,7 @@ class UsersController extends Controller
               return redirect('login')->with('message',$message);
 
         }else {
-            //$request->session()->set('admin' ,$username);
+
             $request->session()->put('admin' ,$username);
             $get_sesstion = $request->session()->get('admin');
             return redirect('admin')->with('success', 'Te-ai logat cu succes');
@@ -35,12 +35,9 @@ class UsersController extends Controller
 
     public function logOut(Request $request){
         $get_sesstion = $request->session()->get('admin');
-        //return $get_sesstion;
-        //$request->session()->forget('admin');
+
         $request->session()->flush();
-        //$request->session()->flush('admin');
-        //$logout = "Te rog sa completezi datele corecte";
-        //return $get_sesstion;
+
         return redirect('/')->with('logout', 'Te-ai delogat');
     }
 

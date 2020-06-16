@@ -6,8 +6,6 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-          <a class="nav-item nav-link" href="#">Features</a>
-          <a class="nav-item nav-link" href="#">Pricing</a>
           <a href="{{route('product.shoppingCart')}}"><i class="fas fa-shopping-cart nav-item nav-link"></i>
              <span class="badge">{{session()->has('cart') ? session()->get('cart')->totalQty : ''}}</span>
          </a>

@@ -1,2 +1,0 @@
-
-esti logat

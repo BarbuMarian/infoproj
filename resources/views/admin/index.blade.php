@@ -1,1 +1,0 @@
-aici este pagina index
